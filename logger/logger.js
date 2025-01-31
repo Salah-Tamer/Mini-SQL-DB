@@ -83,5 +83,5 @@ export function logInfo(message, ...args) {
  * @param {...any[]} args - Additional arguments to log.
  */
 export function logSuccess(message, ...args) {
-  logger(LOG_LEVELS.SUCCESS, pc.green, console.log, ...args);
+  logger(LOG_LEVELS.SUCCESS, pc.green, console.log, message, ...args);
 }
