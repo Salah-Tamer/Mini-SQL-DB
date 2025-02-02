@@ -1,5 +1,6 @@
 // test/test_db.js
 
+import { backupDatabase, restoreDatabase } from "../lib/backup.js";
 import { createIndex, searchWithIndex } from "../lib/indexing.js";
 import { insertInto, select } from "../lib/query.js";
 import { createTable } from "../lib/schema.js";
@@ -69,12 +70,32 @@ function testSearchWithIndex_v1() {
   }
 }
 
+function testBackupDatabase_v1() {
+  try {
+    backupDatabase("backup");
+    logger("TEST", pc.magenta, console.error, "Backup test passed\n");
+  } catch (error) {
+    logger("TEST", pc.red, console.error, "Backup test failed\n", error);
+  }
+}
+
+function testRestoreDatabase_v1() {
+  try {
+    restoreDatabase("backup");
+    logger("TEST", pc.magenta, console.error, "Restore test passed\n");
+  } catch (error) {
+    logger("TEST", pc.red, console.error, "Restore test failed\n", error);
+  }
+}
+
 function main() {
   testCreateTable_v1();
   testInsertInto_v1();
   testSelect_v1();
   testCreateIndex_v1();
   testSearchWithIndex_v1();
+  testBackupDatabase_v1();
+  testRestoreDatabase_v1();
 }
 
 main();
