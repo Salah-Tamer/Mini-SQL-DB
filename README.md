@@ -1,7 +1,6 @@
 # Mini SQL Database
 
-A lightweight, file-based SQL database implemented in JavaScript. This project provides SQL-like syntax for querying and managing structured data while maintaining simplicity and efficiency.
-
+A lightweight, file-based SQL database built in JavaScript, offering a simple and efficient way to manage structured data. It supports SQL-like queries, uses indexing for faster performance, and ensures safe concurrent access with built-in locking mechanisms.
 ## Features
 
 - File-based storage using JSON files.
