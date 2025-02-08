@@ -3,7 +3,7 @@
 import { performWithLock } from "../lib/lock.js";
 import { backupDatabase, restoreDatabase } from "../lib/backup.js";
 import { createIndex, searchWithIndex } from "../lib/indexing.js";
-import { insertInto, select } from "../lib/query.js";
+import { insertInto, select, selectWhere } from "../lib/query.js";
 import { createTable } from "../lib/schema.js";
 import { logger } from "../logger/logger.js";
 import pc from "picocolors";
@@ -45,9 +45,21 @@ function testSelect_v1() {
     select(selectQuery_1);
     select(selectQuery_2);
     select(selectQuery_3);
-    logger("TEST", pc.magenta, console.info, "Select test passed\n");
+    logger("TEST", pc.magenta, console.info, "SELECT test passed\n");
   } catch (error) {
-    logger("TEST", pc.red, console.error, "Select test failed\n", error);
+    logger("TEST", pc.red, console.error, "SELECT test failed\n", error);
+  }
+}
+
+function testSelectWhere_v1() {
+  const whereQuery_1 = "SELECT * FROM users WHERE name = 'Ahmed' AND age = 18";
+  const whereQuery_2 = "SELECT * FROM users WHERE name = 'Salah' OR age = 19";
+  try {
+    selectWhere(whereQuery_1);
+    selectWhere(whereQuery_2);
+    logger("TEST", pc.magenta, console.info, "SELECT WHERE test passed\n");
+  } catch (error) {
+    logger("TEST", pc.red, console.error, "SELECT test failed\n", error);
   }
 }
 
@@ -122,6 +134,7 @@ function main() {
   testCreateTable_v1();
   testInsertInto_v1();
   testSelect_v1();
+  testSelectWhere_v1();
   testCreateIndex_v1();
   testSearchWithIndex_v1();
   testBackupDatabase_v1();
